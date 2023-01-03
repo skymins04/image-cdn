@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시계위젯</title>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="hour"></div>
+      <div class="dot"></div>
+      <div class="minute"></div>
+      <div class="dot"></div>
+      <div class="second"></div>
+    </div>
+    <script>
+      const showCurrentTime = () => {
+        const date = new Date();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+        document.querySelector(".hour").innerHTML = h
+          .toString()
+          .padStart(2, "0");
+        document.querySelector(".minute").innerHTML = m
+          .toString()
+          .padStart(2, "0");
+        document.querySelector(".second").innerHTML = s
+          .toString()
+          .padStart(2, "0");
+      };
+      const interval = setInterval(showCurrentTime, 100);
+    </script>
+    <style>
+      .clock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.2em;
+      }
+      .dot::before {
+        content: ":";
+      }
+    </style>
+  </body>
+</html>
