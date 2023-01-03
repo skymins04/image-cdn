@@ -14,33 +14,66 @@
       <div class="dot"></div>
       <div class="second"></div>
     </div>
+    <div class="date">
+      <div class="month"></div>
+      <div class="dot"></div>
+      <div class="day"></div>
+      <div class="dow"></div>
+    </div>
     <script>
+      const dowArr = [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+      ];
       const showCurrentTime = () => {
         const date = new Date();
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-        document.querySelector(".hour").innerHTML = h
+        const hour = date.getHours();
+        const min = date.getMinutes();
+        const sec = date.getSeconds();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const dowIdx = date.getDay();
+        document.querySelector(".hour").innerHTML = hour
           .toString()
           .padStart(2, "0");
-        document.querySelector(".minute").innerHTML = m
+        document.querySelector(".minute").innerHTML = min
           .toString()
           .padStart(2, "0");
-        document.querySelector(".second").innerHTML = s
+        document.querySelector(".second").innerHTML = sec
           .toString()
           .padStart(2, "0");
+        document.querySelector(".month").innerHTML = month
+          .toString()
+          .padStart(2, "0");
+        document.querySelector(".day").innerHTML = day
+          .toString()
+          .padStart(2, "0");
+        for (const dowItm of dowArr) {
+          document.querySelector(".dow").classList.remove(dowItm);
+        }
+        document.querySelector(".dow").classList.add(dowArr[dowIdx]);
       };
       const interval = setInterval(showCurrentTime, 100);
     </script>
     <style>
-      .clock {
+      .clock,
+      .date {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.2em;
       }
-      .dot::before {
+      .clock .dot::before {
         content: ":";
+      }
+
+      .date .dot::before {
+        content: ".";
       }
     </style>
   </body>
